@@ -26,16 +26,17 @@ services:
      - MYSQL_PASSWORD=mysqlpw 
   
   mysql1:
-    image: debezium/example-mysql:${DEBEZIUM_VERSION}
+    build:
+      context: mysql
     ports:
-     - 3308:3308
+     - "3308:3308"
     environment:
      - MYSQL_ROOT_PASSWORD=debezium
      - MYSQL_USER=mysqluser
-     - MYSQL_PASSWORD=mysqlpw 
+     - MYSQL_PASSWORD=mysqlpw
+     - MYSQL_DB=inventory
   
   connect:
-    image: debezium/connect-jdbc-es:${DEBEZIUM_VERSION}
     build:
       context: debezium
     ports:
